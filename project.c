@@ -6,7 +6,7 @@ struct Book {
     char author[100];
     int available=1;
     char genre[100];
-} books[40];
+} books[100];
 struct Member {
     char name[100];
     int id;
@@ -14,30 +14,64 @@ struct Member {
     int av=0;
 } members[500];
 
-void  Displaybook();
-FILE *fptr;
-fptr = fopen("books.txt","r");
- 
-if (fptr == NULL)
-     {
-        printf("File does not exist");
-        return 1;
-    }
- else
-    {   
-fscanf(fptr,"%d,%[^,],%[^,],%d,%[^,]",book.id,book)
-
-
-    }
 void issuebook(struct Book books[],struct Member members[]) ;
 {
     int uid;
     printf("Enter your USER ID \n");
     scanf("%d",&uid);
+    int id1;
+     Displaybook();
+     for (int i = 0; i < 10; i++)
+     {
+         if(uid==members[i].id)
+         {
+            printf("Welcome to Library Management System \n");
+         }
+         else
+         {
+             printf("You have entered invalid ID,Please try again. \n");
+         }
+     printf("Enter book ID \n");
+     scanf("%d",&id);
+     if(books[i].id==id1;) 
+     {
+      if (books[i].available==0)
+     {
+        printf("Sorry, this book is already issued\n");
+      }
+      else 
+      {
+        printf("You have successfully borrowed book of ID %d \n ",books[i].id);
+        books[i].available=0;
+        members[i].av=1;
+           break;
+      }
+      break;
+      else
+      {
+        printf("You have entered wrong ID.Try again \n");
+      }
+     }
+     }
+}
 
-   
-   
-    print
+
+ int count = loadBooksFromFile(books);
+ void  Displaybook(struct Book books[],int count) {
+     printf("Available Books are:\n");
+    printf("ID Title Author\n");
+    for (int i=0; i<count;i++) {
+        if (books[i].isAvailable==1) { 
+            printf("%d  %s  %s\n", books[i].id, books[i].title, books[i].author);
+        }
+    }
+}
+ 
+void issuebook(struct Book books[],struct Member members[]) ;
+{
+    int uid;
+    printf("Enter your USER ID \n");
+    scanf("%d",&uid);
     int id1;
      Displaybook();
      for (int i = 0; i < 10; i++)
