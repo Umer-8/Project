@@ -203,7 +203,6 @@ switch (choice)
      case 1:
     issuebook(books[40],count);
     updatebooks(books[40],count);
-     
     break;
     case 2:
     returnbook(books[40],count);
