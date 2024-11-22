@@ -102,8 +102,11 @@ int loadbooks(struct Book books[40])
 fclose(fptr);
 return count;
 }
-void issuebook(struct Book books[40],int id,int count) ;
+void issuebook(struct Book books[40],int count) 
 {
+    int id;
+printf("Enter Book ID \n");
+scanf("%d",&id);
     int found=0;
       for(int i=0;i<count;i++)
       {
@@ -159,6 +162,56 @@ fclose(fptr);
            }
         }
  }
+  void returnbook(struct Book books[40],int count) {
+    int id;
+printf("Enter Book ID \n");
+scanf("%d",&id);
+  int found=0,days,fine=0,daysf,rating;
+      for(int i=0;i<count;i++)
+      {
+         if(books[i].id==id)
+         {
+            if(books[i].available==0)
+            {
+            	printf("Enter number of days passed since you borrowed this book: ")
+            	scanf("%d",&days)
+            	if (days>14) {
+            		daysf=days-14;
+            		fine=25*daysf;
+            		printf("You are returning the book late. You need to pay a fine of %d",fine);
+				}
+                printf("You have successfully returned book of ID %d and title %s by %s \n",books[i].id,books[i].title,books[i].author);
+                 books[i].available=1;
+                found=1;
+                while (1) {
+				printf("Please rate the book out of 5.");
+                scanf("%d",&rating);
+                if (rating>=1 && rating<=5) {
+                books[i].rsum+=rating;
+                books[i].rborrow++;
+                break;
+                }
+				else {
+					printf("Invalid rating entered. Please enter a valid rating \n");
+				}
+			}
+                
+               
+            }
+            else
+            {
+            printf("The book of ID %d and title %s by %s is not  borrowed yet \n",books[i].id,books[i].title,books[i].author);
+                 found=1;
+            }
+            break;
+         }
+      }
+      if(found==0)
+      {
+        printf("You have entered wrong book ID \n");
+      }
+      updatebooks(books,count);
+}
 int main()
 {
  int count1=loadmembers(members[100]);   
@@ -174,10 +227,7 @@ int choice;
 printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Add a Member\n 5- Exit\n");
 printf("Enter your choice: ");
 scanf("%d",&choice);
-int id;
 
-printf("Enter Book ID \n");
-scanf("%d",&id);
 
 int count=0;
 
@@ -187,14 +237,14 @@ int count=loadbooks(books[40]);
 switch (choice) 
 {
      case 1:
-    issuebook(books[40],id,count);
+    issuebook(books[40],count);
     updatebooks(books[40],count);
     break;
     case 2:
-    returnbook();
+    returnbook(books[40],count);
     break;
     case 3:
-    Displaybook();
+    Displaybook(books[40]);
     break;
     case 4:
     addmember();
