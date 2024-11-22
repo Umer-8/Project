@@ -1,4 +1,4 @@
- #include<stdio.h>
+#include<stdio.h>
  #include <string.h>
 struct Book 
 {
@@ -7,13 +7,13 @@ struct Book
     char author[100];
     int available=1;
     char genre[100];
+    int rsum;
+    int rborrow;
 } books[40];
 struct Member
 {
     char name[100];
     int id;
-    int contactnum[20];
-    int av=0;
     char pass[40];
 } members[100];
 
@@ -84,22 +84,23 @@ void updatebooks(struct Book *books,int count)
     }
   fclose(fptr);
 }
-
-void issuebook(struct Book books[40],int count) {
+void issuebook(struct Book books[40],int id,int count) {
   int found=0;
-      int id;
-printf("Enter Book ID \n");
-scanf("%d",&id);
       for(int i=0;i<count;i++)
       {
          if(books[i].id==id)
          {
             if(books[i].available==1)
             {
+            	if (books[i].rating>0) {
+			float rating1= books[i].rsum/books[i].rborrow;
+			printf("The rating for this book is: %.3f",rating1);
+			}
                 printf("You have successfully borrowed book of ID %d and title %s by %s \n",books[i].id,books[i].title,books[i].author);
                 books[i].available=0;
                 found=1;
-            }
+                books[i].borrow++;
+               }
             else
             {
             printf("The book of ID %d and title %s by %s is already borrowed \n",books[i].id,books[i].title,books[i].author);
@@ -129,10 +130,7 @@ scanf("%d",&id);
            }
         }
  }
-  void returnbook(struct Book books[40],int count) {
-    int id;
-printf("Enter Book ID \n");
-scanf("%d",&id);
+ void returnbook(struct Book books[40],int id,int count) {
   int found=0,days,fine=0,daysf,rating;
       for(int i=0;i<count;i++)
       {
@@ -179,6 +177,32 @@ scanf("%d",&id);
       }
       updatebooks(books,count);
 }
+  void addmember()
+  {
+  	char name[40];
+  	int id,
+  	char pass[15];
+  	FILE *fptr=fopen("users.txt","a");
+      if(fptr==NULL)
+      {
+        printf("File does not exist \n");
+        return 0;
+      }
+	  printf("Enter name: ");
+	  scanf("%s",name);
+	  printf("\n Enter ID: ");
+	  scanf("%d",id);
+	  printf("\n Enter password (max 15 characters): ");
+	  scanf("%s",pass);
+	  
+	  fprintf(fptr,"%s,%d,%s \n",name,id,pass);
+	  fclose(fptr);
+}
+	   
+	  
+	  
+        
+  }
 int main()
 {
  int count1=loadmembers(members);   
@@ -194,21 +218,25 @@ int choice;
 printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Add a Member\n 5- Exit\n");
 printf("Enter your choice: ");
 scanf("%d",&choice);
+int id;
+
+printf("Enter Book ID \n");
+scanf("%d",&id);
 
 
-int count=loadbooks(books);
 
 switch (choice) 
 {
-     case 1:
-    issuebook(books[40],count);
-    updatebooks(books[40],count);
+    case 1:
+    int count=loadbooks(books);	
+    issuebook(books,id,count);
     break;
     case 2:
-    returnbook(books[40],count);
+    int count=loadbooks(books);
+       returnbook(books,id,count);
     break;
     case 3:
-    Displaybook(books[40]);
+    Displaybook(books);
     break;
     case 4:
     addmember();
