@@ -85,6 +85,9 @@ void updatebooks(struct Book *books,int count)
   fclose(fptr);
 }
 void issuebook(struct Book books[40],int id,int count) {
+    int id;
+printf("Enter Book ID \n");
+scanf("%d",&id);
   int found=0;
       for(int i=0;i<count;i++)
       {
@@ -130,7 +133,10 @@ void issuebook(struct Book books[40],int id,int count) {
            }
         }
  }
- void returnbook(struct Book books[40],int id,int count) {
+ void returnbook(struct Book books[40],int count) {
+  int id;
+printf("Enter Book ID \n");
+scanf("%d",&id);
   int found=0,days,fine=0,daysf,rating;
       for(int i=0;i<count;i++)
       {
@@ -198,11 +204,7 @@ void issuebook(struct Book books[40],int id,int count) {
 	  fprintf(fptr,"%s,%d,%s \n",name,id,pass);
 	  fclose(fptr);
 }
-	   
-	  
-	  
-        
-  }
+
 int main()
 {
  int count1=loadmembers(members);   
@@ -215,25 +217,21 @@ scanf("%s",upass);
 login(members,uid,upass,count1);
 
 int choice;
+while(1)
+{
 printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Add a Member\n 5- Exit\n");
 printf("Enter your choice: ");
 scanf("%d",&choice);
 int id;
-
-printf("Enter Book ID \n");
-scanf("%d",&id);
-
-
-
 switch (choice) 
 {
     case 1:
     int count=loadbooks(books);	
-    issuebook(books,id,count);
+    issuebook(books,count);
     break;
     case 2:
     int count=loadbooks(books);
-       returnbook(books,id,count);
+       returnbook(books,count);
     break;
     case 3:
     Displaybook(books);
@@ -243,9 +241,10 @@ switch (choice)
     break;
     case 5:
     printf("Thank you for visiting our library management system. Please come again!\n");
-    break;
+    return 0;
     default:
-    printf("Invalid choice \n");
+    printf("Invalid choice.Please try again. \n");
+}
 }
 return 0;
 }
