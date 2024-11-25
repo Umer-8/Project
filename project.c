@@ -5,7 +5,7 @@ struct Book
     char title[100];
     int id;
     char author[100];
-    int available=1;
+    int available;
     char genre[100];
     int rsum;
     int rborrow;
@@ -50,41 +50,42 @@ int loadmembers(struct Member members[100])
     fclose(fptr);
     return count1;
 }
-void login(struct Member members[100],int uid,char upass,int count1)
+int login(struct Member members[100],int uid,char *upass,int count1)
 {
 for(int i=0;i<count1;i++)
 {
     if(members[i].id==uid) {
       if (strcmp(members[i].pass,upass)==0) {
     printf("Welcome to Library management system");
-     return;
+     return i;
     }
     else
     {
       printf("Invalid Password entered \n");
+      return;
     }
-    }
-    else {
-    printf("Invalid User ID entered. \t Please enter a valid ID\n");
-    break;
     }
 }
+
+    printf("Invalid User ID entered.\n");
+    
 }
+
 void updatebooks(struct Book *books,int count)
 {
     FILE *fptr=fopen("books.txt","w");
       if(fptr==NULL)
       {
         printf("File does not exist \n");
-        return 0;
+        return ;
       }
   for(int i=0;i<count;i++)
   {
-  fprintf(fptr,"%d,%s,%s,%s,%d\n",books[i].id,books[i].titile,books[i].author,books[i].genre,books[i].available);
+  fprintf(fptr,"%d,%s,%s,%s,%d\n",books[i].id,books[i].title,books[i].author,books[i].genre,books[i].available);
     }
   fclose(fptr);
 }
-void issuebook(struct Book books[40],int id,int count) {
+void issuebook(struct Book books[40],int count) {
     int id;
 printf("Enter Book ID \n");
 scanf("%d",&id);
@@ -95,14 +96,14 @@ scanf("%d",&id);
          {
             if(books[i].available==1)
             {
-            	if (books[i].rating>0) {
-			float rating1= books[i].rsum/books[i].rborrow;
+            	if (books[i].rborrow>0) {
+			float rating1= (float)books[i].rsum/books[i].rborrow;
 			printf("The rating for this book is: %.3f",rating1);
 			}
                 printf("You have successfully borrowed book of ID %d and title %s by %s \n",books[i].id,books[i].title,books[i].author);
                 books[i].available=0;
                 found=1;
-                books[i].borrow++;
+                books[i].rborrow++;
                }
             else
             {
@@ -144,8 +145,8 @@ scanf("%d",&id);
          {
             if(books[i].available==0)
             {
-            	printf("Enter number of days passed since you borrowed this book: ")
-            	scanf("%d",&days)
+            	printf("Enter number of days passed since you borrowed this book: ");
+            	scanf("%d",&days);
             	if (days>14) {
             		daysf=days-14;
             		fine=25*daysf;
@@ -183,33 +184,33 @@ scanf("%d",&id);
       }
       updatebooks(books,count);
 }
-  void addmember()
+  void changememberpwd(int i,int count1,struct Member members[])
   {
-  	char name[40];
-  	int id,
-  	char pass[15];
-  	FILE *fptr=fopen("users.txt","a");
+  	char password[15];
+  	
+	  printf("\n Enter new password (max 15 characters): ");
+	  scanf("%s",password);
+	 strcpy(members[i].pass, password);
+
+    FILE *fptr=fopen("users.txt","w");
       if(fptr==NULL)
       {
         printf("File does not exist \n");
         return 0;
       }
-	  printf("Enter name: ");
-	  scanf("%s",name);
-	  printf("\n Enter ID: ");
-	  scanf("%d",id);
-	  printf("\n Enter password (max 15 characters): ");
-	  scanf("%s",pass);
-	  
-	  fprintf(fptr,"%s,%d,%s \n",name,id,pass);
-	  fclose(fptr);
+     for(int i=0;i<count1;i++)
+  {
+  fprintf(fptr,"%s,%d,%s\n",members[i].name,members[i].id,members[i].pass);
+    }
+  fclose(fptr);
 }
+
 
 int main()
 {
  int count1=loadmembers(members);   
 int uid;
-int upass;
+char upass[15];
 printf("Enter your member ID: ");
 scanf("%d",&uid);
 printf("Enter your password: ");
@@ -222,7 +223,7 @@ while(1)
 printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Add a Member\n 5- Exit\n");
 printf("Enter your choice: ");
 scanf("%d",&choice);
-int id;
+
 switch (choice) 
 {
     case 1:
@@ -237,13 +238,13 @@ switch (choice)
     Displaybook(books);
     break;
     case 4:
-    addmember();
+    changememberpwd(i,count1,members);
     break;
     case 5:
     printf("Thank you for visiting our library management system. Please come again!\n");
     return 0;
     default:
-    printf("Invalid choice.Please try again. \n");
+    printf("Invalid choice. Please try again. \n");
 }
 }
 return 0;

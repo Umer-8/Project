@@ -1,11 +1,11 @@
-1,Harry Potter,J.K. Rowling,0,Fantasy  
+1,Harry Potter,J.K. Rowling,1,Fantasy  
 2,The Hobbit,J.R.R. Tolkien,1,Adventure  
-3,To Kill a Mockingbird,Harper Lee,0,Classic  
-4,1984,George Orwell,0,Dystopian  
-5,Pride and Prejudice,Jane Austen,0,Romance  
+3,To Kill a Mockingbird,Harper Lee,1,Classic  
+4,1984,George Orwell,1,Dystopian  
+5,Pride and Prejudice,Jane Austen,1,Romance  
 6,The Great Gatsby,F. Scott Fitzgerald,1,Classic  
-7,Moby Dick,Herman Melville,0,Adventure  
-8,The Catcher in the Rye,J.D. Salinger,0,Classic  
+7,Moby Dick,Herman Melville,1,Adventure  
+8,The Catcher in the Rye,J.D. Salinger,1,Classic  
 9,The Alchemist,Paulo Coelho,1,Philosophy  
-10,The Da Vinci Code,Dan Brown,0,Thriller
+10,The Da Vinci Code,Dan Brown,1,Thriller
 
