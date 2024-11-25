@@ -8,4 +8,15 @@
 8,The Catcher in the Rye,J.D. Salinger,1,Classic  
 9,The Alchemist,Paulo Coelho,1,Philosophy  
 10,The Da Vinci Code,Dan Brown,1,Thriller
+11,The Lord of the Rings,J.R.R. Tolkien,1,Fantasy  
+12,The Kite Runner,Khaled Hosseini,1,Drama  
+13,Life of Pi,Yann Martel,1,Adventure  
+14,Gone Girl,Gillian Flynn,1,Thriller  
+15,Animal Farm,George Orwell,1,Dystopian  
+16,Wuthering Heights,Emily Bronte,1,Romance  
+17,The Fault in Our Stars,John Green,1,Drama  
+18,Brave New World,Aldous Huxley,1,Dystopian  
+19,The Hunger Games,Suzanne Collins,1,Fantasy  
+20,Inferno,Dan Brown,1,Thriller  
+
 
