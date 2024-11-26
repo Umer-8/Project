@@ -1,1 +1,10 @@
- 
+Alice Smith,1001,pass123
+Bob Johnson,1002,qwerty
+Charlie Brown,1003,abc123
+Diana Prince,1004,wonder123
+Ethan Hunt,1005,mission1
+Fiona Clarke,1006,secure456
+George Miller,1007,pass789
+Helen Carter,1008,library987
+Ian Wright,1009,bookworm
+Jackie Chan,1010,martial99s
