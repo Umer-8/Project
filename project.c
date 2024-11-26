@@ -79,6 +79,7 @@ for (int i = 0; i < count1; i++)
            printf("Invalid user id entered.Please try again\n", uid);
            return -1;    
 }
+}
 void updatebooks(struct Book *books,int count)
 {
     FILE *fptr=fopen("books.txt","w");
@@ -240,7 +241,7 @@ void changememberpwd(int i, int count1, struct Member members[])
     fclose(fptr);
     printf("Password updated successfully!\n");
 }
-int main()
+int main() 
 {
     char name[40];
 int count1=loadmembers(members);   
@@ -318,5 +319,8 @@ else if(ua=='a')
   }
   }
 return 0;
+
 }
+
+
 
