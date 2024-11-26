@@ -43,7 +43,7 @@ int loadmembers(struct Member members[100])
      return 0;
  }
  int count1=0;
-    while(fscanf(fptr,"%49[^,],%d,%49[^,]\n",members[count1].name,&members[count1].id,members[count1].pass)==3)
+    while(fscanf(fptr," %49[^,],%d,%39s",members[count1].name,&members[count1].id,members[count1].pass)==3)
     {
     count1++;
     }
@@ -56,7 +56,7 @@ for(int i=0;i<count1;i++)
 {
     if(members[i].id==uid) {
       if (strcmp(members[i].pass,upass)==0) {
-    printf("Welcome to Library management system");
+    printf("Welcome to Library management system! \n");
      return i;
     }
     else
@@ -221,7 +221,7 @@ if (currentmember < 0) {
 }
 while(1)
 {
-printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Add a Member\n 5- Exit the system\n");
+printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Change Member password \n 5- Exit the system\n");
 printf("Enter your choice: ");
 scanf("%d",&choice);
 int count=loadbooks(books);
