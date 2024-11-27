@@ -73,6 +73,7 @@ for (int i = 0; i < count1; i++)
         }
     }
 }
+
            printf("Invalid user id entered.Please try again\n");
            return -1;    
 }
