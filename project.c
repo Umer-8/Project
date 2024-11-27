@@ -43,9 +43,10 @@ int loadmembers(struct Member members[100])
      return 0;
  }
  int count1=0;
-   while (fscanf(fptr, " %49[^,],%d,%39s", members[count1].name, &members[count1].id, members[count1].pass) == 3) {
-        count1++;
-    }
+   while (fscanf(fptr, "%49[^,],%d,%49[^,\n]\n", members[count1].name, &members[count1].id, members[count1].pass) == 3)
+  {
+    count1++;
+  }
     fclose(fptr);
     return count1;
 }
@@ -53,12 +54,6 @@ int login(struct Member members[100],int uid,char *upass,int count1)
 {
 for (int i = 0; i < count1; i++) 
 {
-    if(members[i].id==uid) {
-      if (strcmp(members[i].pass,upass)==0) {
-    printf("Welcome to Library management system! \n");
-     return i;
-    }
-    else
     if (members[i].id == uid) 
     {
         if (strcmp(members[i].pass,upass) == 0) 
@@ -68,15 +63,13 @@ for (int i = 0; i < count1; i++)
         }
          else 
         {
-            printf("Invalid password entered.Please try again\n");
+            printf("Invalid password entered.Please try again\n", uid);
             return -1;
         }
     }
 }
-
-           printf("Invalid user id entered.Please try again\n");
+           printf("Invalid user id entered.Please try again\n", uid);
            return -1;    
-}
 }
 void updatebooks(struct Book *books,int count)
 {
@@ -216,7 +209,7 @@ void addmember(char name[40]) {
     scanf("%d", &id);
     printf("Enter password (max 15 characters): ");
     scanf("%s", pass);  
-    fprintf(fptr, "%s,%d,%s\n", name, id, pass);
+    fprintf(fptr,"%s,%d,%s\n", name, id, pass);
     fclose(fptr);
 }
 
