@@ -43,12 +43,9 @@ int loadmembers(struct Member members[100])
      return 0;
  }
  int count1=0;
-    while(fscanf(fptr," %49[^,],%d,%39s",members[count1].name,&members[count1].id,members[count1].pass)==3)
-    {
-   while (fscanf(fptr, "%49[^,],%d,%49[^,\n]\n", members[count1].name, &members[count1].id, members[count1].pass) == 3)
-  {
-    count1++;
-  }
+   while (fscanf(fptr, " %49[^,],%d,%39s", members[count1].name, &members[count1].id, members[count1].pass) == 3) {
+        count1++;
+    }
     fclose(fptr);
     return count1;
 }
@@ -147,7 +144,7 @@ scanf("%d",&id);
                 {
             		daysf=days-14;
             		fine=25*daysf;
-            		printf("You are returning the book late. You need to pay a fine of %d \n",fine);
+            		printf("You are returning the book late. You need to pay a fine of %d Rs /-\n",fine);
 				        }
                 printf("You have successfully returned book of ID %d and title %s by %s \n",books[i].id,books[i].title,books[i].author);
                 books[i].available=1;
@@ -241,7 +238,7 @@ void changememberpwd(int i, int count1, struct Member members[])
     fclose(fptr);
     printf("Password updated successfully!\n");
 }
-int main() 
+int main()
 {
     char name[40];
 int count1=loadmembers(members);   
@@ -268,7 +265,6 @@ printf("Login unsuccessful. Please try again next time\n");
 while(1)
 {
 printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Change Member password \n 5- Exit the system\n");
-printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books\n 4-Change member password\n 5-Exit the program.\n");
 printf("Enter your choice: ");
 scanf("%d",&choiceu);
 int count=loadbooks(books);
@@ -319,8 +315,4 @@ else if(ua=='a')
   }
   }
 return 0;
-
 }
-
-
-
