@@ -43,10 +43,9 @@ int loadmembers(struct Member members[100])
      return 0;
  }
  int count1=0;
-   while (fscanf(fptr, "%49[^,],%d,%49[^,\n]\n", members[count1].name, &members[count1].id, members[count1].pass) == 3)
-  {
-    count1++;
-  }
+   while (fscanf(fptr, " %49[^,],%d,%39s", members[count1].name, &members[count1].id, members[count1].pass) == 3) {
+        count1++;
+    }
     fclose(fptr);
     return count1;
 }
@@ -54,6 +53,12 @@ int login(struct Member members[100],int uid,char *upass,int count1)
 {
 for (int i = 0; i < count1; i++) 
 {
+    if(members[i].id==uid) {
+      if (strcmp(members[i].pass,upass)==0) {
+    printf("Welcome to Library management system! \n");
+     return i;
+    }
+    else
     if (members[i].id == uid) 
     {
         if (strcmp(members[i].pass,upass) == 0) 
@@ -70,6 +75,7 @@ for (int i = 0; i < count1; i++)
 }
            printf("Invalid user id entered.Please try again\n");
            return -1;    
+}
 }
 void updatebooks(struct Book *books,int count)
 {
@@ -138,7 +144,7 @@ scanf("%d",&id);
                 {
             		daysf=days-14;
             		fine=25*daysf;
-            		printf("You are returning the book late. You need to pay a fine of %d \n",fine);
+            		printf("You are returning the book late. You need to pay a fine of %d Rs /-\n",fine);
 				        }
                 printf("You have successfully returned book of ID %d and title %s by %s \n",books[i].id,books[i].title,books[i].author);
                 books[i].available=1;
@@ -258,7 +264,7 @@ printf("Login unsuccessful. Please try again next time\n");
 }
 while(1)
 {
-printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books\n 4-Change member password\n 5-Exit the program.\n");
+printf("Choose from the following options:\n 1- Issue book\n 2- Return book\n 3- Display all books \n 4-Change Member password \n 5- Exit the system\n");
 printf("Enter your choice: ");
 scanf("%d",&choiceu);
 int count=loadbooks(books);
@@ -310,4 +316,3 @@ else if(ua=='a')
   }
 return 0;
 }
-
