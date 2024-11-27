@@ -63,12 +63,12 @@ for (int i = 0; i < count1; i++)
         }
          else 
         {
-            printf("Invalid password entered.Please try again\n", uid);
+            printf("Invalid password entered.Please try again\n");
             return -1;
         }
     }
 }
-           printf("Invalid user id entered.Please try again\n", uid);
+           printf("Invalid user id entered.Please try again\n");
            return -1;    
 }
 void updatebooks(struct Book *books,int count)
